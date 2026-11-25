@@ -1,0 +1,34 @@
+# C++ build files
+build/
+build-*/
+CMakeFiles/
+CMakeCache.txt
+
+# Python environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Fuzzing trial data
+trials/
+logs/
+naive-sample/
+adapted-sample/
+
+# Coverage data
+*.profraw
+*.profdata
+*-coverage.txt
+
+# Temporary files
+*.tmp
+*.swp
+
+# Temporary bug investigation
+sheet-fix/
+
+# Submission archive
+submission/
