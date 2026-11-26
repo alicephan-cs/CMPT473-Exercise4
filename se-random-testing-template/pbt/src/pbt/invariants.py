@@ -17,4 +17,12 @@ def is_valid_toposort(
     nodes: Sequence[int], edges: Sequence[tuple[int, int]], order: Sequence[int]
 ) -> bool:
     """True if `order` is a topological order of the DAG (nodes, edges)."""
-    raise NotImplementedError("warm-up: write the properties of a topological order")
+    if len(order) != len(nodes):
+        return False
+
+    if set(order) != set(nodes):
+        return False
+
+    positions = {node: index for index, node in enumerate(order)}
+
+    return all(positions[source] < positions[target] for source, target in edges)
