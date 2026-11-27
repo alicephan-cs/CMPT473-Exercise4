@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import random
 
-from sheetgen.grammar import (  # noqa: F401 (for your implementation)
+from sheetgen.grammar import (
     GRAMMAR,
     START,
     cheapest_expansions,
@@ -36,4 +36,21 @@ def generate(rng: random.Random, *, max_depth: int = 20) -> str:
 
     All randomness must come from `rng`, so that a seed reproduces a corpus.
     """
-    raise NotImplementedError("Phase 2: implement random derivation from GRAMMAR")
+    stack = [(START, 0)]
+    output: list[str] = []
+
+    while stack:
+        symbol, depth = stack.pop()
+
+        if not is_nonterminal(symbol):
+            output.append(symbol)
+            continue
+
+        expansions = GRAMMAR[symbol] if depth < max_depth else cheapest_expansions(symbol)
+
+        expansion = rng.choice(expansions)
+
+        for child in reversed(expansion):
+            stack.append((child, depth + 1))
+
+    return "".join(output)
